@@ -29,7 +29,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewWillAppear(_ animated: Bool) {
         mapView.delegate = self
         mapView.showsUserLocation = true;
-        
+        setupView()
+    }
+    
+    func setupView() {
+        if let locationManager = locationManager {
+            if(locationManager.monitoredRegions.count > 0) {
+                self.geofencesLabel.text = "Geofences ON"
+                let region = self.regionToMonitor()
+                mapView.addOverlay(MKCircle(center: region.center, radius: region.radius))
+            } else {
+                self.geofencesLabel.text = "Geofences OFF"
+                mapView.removeOverlays(mapView.overlays)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,14 +62,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if let locationManager = self.locationManager {
             let region = self.regionToMonitor()
             if(locationManager.monitoredRegions.count > 0) {
-                self.geofencesLabel.text = "Geofences OFF"
                 locationManager.stopMonitoring(for: region)
-                mapView.removeOverlays(mapView.overlays)
             } else {
-                self.geofencesLabel.text = "Geofences ON"
                 locationManager.startMonitoring(for: region)
-                mapView.add(MKCircle(center: region.center, radius: region.radius))
             }
+            setupView()
         } else {
             notify(msg: "Unable to set geofence")
         }

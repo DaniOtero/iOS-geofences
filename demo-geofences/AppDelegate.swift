@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     var locationManager : CLLocationManager?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
@@ -24,9 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         center.requestAuthorization(options: [UNAuthorizationOptions.sound ], completionHandler: { (granted, error) in
-            if error == nil{
-                UIApplication.shared.registerForRemoteNotifications()
-            }
+            print(granted)
         })
         
         return true
