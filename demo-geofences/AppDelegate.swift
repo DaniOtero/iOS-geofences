@@ -23,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [UNAuthorizationOptions.sound ], completionHandler: { (granted, error) in
+        center.requestAuthorization(options: [.alert, .sound], completionHandler: { [weak self] (granted, error) in
             print(granted)
+            self?.locationManager?.delegate = self
         })
         
         return true
@@ -59,6 +60,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // Play a sound.
         completionHandler([UNNotificationPresentationOptions.sound, UNNotificationPresentationOptions.alert])
+    }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        notify(msg: "You have entered geofence")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        notify(msg: "You have abandoned geofence")
+    }
+    
+    private func notify(msg : String) {
+        let content = UNMutableNotificationContent()
+        content.title = "Warning"
+        content.body = msg
+        content.sound = UNNotificationSound.default
+        let request = UNNotificationRequest(identifier: "geofence", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }
 

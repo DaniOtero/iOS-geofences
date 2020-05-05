@@ -146,7 +146,7 @@
 				TargetAttributes = {
 					335D8D091F1CE52B002AC64C = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 85XE2CL8H2;
+						DevelopmentTeam = WE63UX99FM;
 						ProvisioningStyle = Automatic;
 					};
 					335D8D1D1F1CE52B002AC64C = {
@@ -361,7 +361,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 85XE2CL8H2;
+				DEVELOPMENT_TEAM = WE63UX99FM;
 				INFOPLIST_FILE = "demo-geofences/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.autentia.demo-geofences";
@@ -374,7 +374,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 85XE2CL8H2;
+				DEVELOPMENT_TEAM = WE63UX99FM;
 				INFOPLIST_FILE = "demo-geofences/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.autentia.demo-geofences";
